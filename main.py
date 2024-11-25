@@ -15,7 +15,8 @@ PHEROMONE_CONST = 100   # Stała feromonu dla najlepszej ścieżki
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--random", help="Ustawienie ziarna losowości", action="store_true")
+    parser.add_argument("-l", "--log", help="Tryb logowania", action="store_true")
+    parser.add_argument("-s", "--seed", help="Ustawienie ziarna losowości", type=int, default=None)
     parser.add_argument("-c", "--cities", help="Liczba miast", type=int, default=NUM_CITIES)
     parser.add_argument("-a", "--ants", help="Liczba mrówek", type=int, default=NUM_ANTS)
     parser.add_argument("-i", "--iterations", help="Liczba iteracji", type=int, default=MAX_ITERATIONS)
@@ -25,8 +26,8 @@ if __name__ == "__main__":
     parser.add_argument("--pheromone", help="Stała feromonu dla najlepszej ścieżki", type=float, default=PHEROMONE_CONST)
     args = parser.parse_args()
     
-    if not args.random:
-        np.random.seed(42)
+    if args.seed:
+        np.random.seed(args.seed)
     
     cities = np.random.rand(NUM_CITIES, 2) * 100
 
@@ -42,17 +43,18 @@ if __name__ == "__main__":
     aco.plot_init_cities()
     iteration, best_distance, best_route, best_plot = aco.run(max_iterations=args.iterations)
 
-    log(
-        iteration, 
-        best_distance, 
-        best_route, 
-        specifics=f"{NUM_CITIES}_{NUM_ANTS}_{MAX_ITERATIONS}_{ALPHA}_{BETA}_{EVAPORATION_RATE}_{PHEROMONE_CONST}"
-    )
-    
-    save_plot(
-        best_plot, 
-        specifics=f"{NUM_CITIES}_{NUM_ANTS}_{MAX_ITERATIONS}_{ALPHA}_{BETA}_{EVAPORATION_RATE}_{PHEROMONE_CONST}"
-    )
+    if args.log:
+        log(
+            iteration, 
+            best_distance, 
+            best_route, 
+            specifics=f"{NUM_CITIES}_{NUM_ANTS}_{MAX_ITERATIONS}_{ALPHA}_{BETA}_{EVAPORATION_RATE}_{PHEROMONE_CONST}"
+        )
+        
+        save_plot(
+            best_plot, 
+            specifics=f"{NUM_CITIES}_{NUM_ANTS}_{MAX_ITERATIONS}_{ALPHA}_{BETA}_{EVAPORATION_RATE}_{PHEROMONE_CONST}"
+        )
 
     print("Najlepsza znaleziona trasa:", best_route)
     print("Długość najlepszej trasy:", best_distance)
