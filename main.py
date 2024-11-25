@@ -29,7 +29,7 @@ if __name__ == "__main__":
     if args.seed:
         np.random.seed(args.seed)
     
-    cities = np.random.rand(NUM_CITIES, 2) * 100
+    cities = np.random.rand(NUM_CITIES, 2) * 10
 
     aco = AntColonyOptimization(
         cities=cities, 
@@ -48,12 +48,12 @@ if __name__ == "__main__":
             iteration, 
             best_distance, 
             best_route, 
-            specifics=f"{NUM_CITIES}_{NUM_ANTS}_{MAX_ITERATIONS}_{ALPHA}_{BETA}_{EVAPORATION_RATE}_{PHEROMONE_CONST}"
+            args=args
         )
         
         save_plot(
             best_plot, 
-            specifics=f"{NUM_CITIES}_{NUM_ANTS}_{MAX_ITERATIONS}_{ALPHA}_{BETA}_{EVAPORATION_RATE}_{PHEROMONE_CONST}"
+            args=args
         )
 
     print("Najlepsza znaleziona trasa:", best_route)

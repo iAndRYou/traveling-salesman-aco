@@ -1,7 +1,7 @@
 import os
 
-def log(iteration, route, distance, specifics=""):
-    dir_path = f"./logs/{specifics}"
+def log(iteration, route, distance, args):
+    dir_path = f"./logs/{args.cities}_{args.ants}_{args.alpha}_{args.beta}_{args.evaporation}_{args.pheromone}"
     
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
@@ -11,11 +11,11 @@ def log(iteration, route, distance, specifics=""):
         instances += 1
     
     with open(f"{dir_path}/log{instances}.txt", "w") as f:
-        f.write("Iteration\tRoute\tDistance\n")
-        f.write(f"{iteration}\t{route}\t{distance}")
+        f.write("Iteration\tRoute\tDistance\tCitites\tAnts\tAlpha\tBeta\tEvaporation\tPheromone\n")
+        f.write(f"{iteration}\t{route}\t{distance}\t{args.cities}\t{args.ants}\t{args.alpha}\t{args.beta}\t{args.evaporation}\t{args.pheromone}")
     
-def save_plot(plot, specifics=""):
-    dir_path = f"./plots/{specifics}"
+def save_plot(plot, args):
+    dir_path = f"./plots/{args.cities}_{args.ants}_{args.alpha}_{args.beta}_{args.evaporation}_{args.pheromone}"
     
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
