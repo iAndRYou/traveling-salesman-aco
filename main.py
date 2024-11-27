@@ -29,7 +29,7 @@ if __name__ == "__main__":
     if args.seed:
         np.random.seed(args.seed)
     
-    cities = np.random.rand(NUM_CITIES, 2) * 10
+    cities = np.random.rand(args.cities, 2) * 10
 
     aco = AntColonyOptimization(
         cities=cities, 
