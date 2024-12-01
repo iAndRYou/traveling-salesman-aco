@@ -108,7 +108,7 @@ class AntColonyOptimization:
         return plt.gcf()
     
      
-    def run(self, max_iterations):
+    def run(self, max_iterations, stop_iterations):
         fig = plt.figure(figsize=(8, 6))
         fig.canvas.manager.set_window_title("Ant Colony Optimization")
 
@@ -116,7 +116,7 @@ class AntColonyOptimization:
         previous_best_distance = self.best_distance     # Poprzednia najlepsza odległość
 
         for iteration in range(max_iterations):
-            if no_change_counter == 10:
+            if no_change_counter == stop_iterations:
                 plot = self.plot_route_and_pheromones(iteration, final=True)
                 return iteration, self.best_route, self.best_distance, plot
 
