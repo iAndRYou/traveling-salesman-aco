@@ -8,6 +8,7 @@ from log import log, save_plot
 NUM_CITIES = 25         # Liczba początkowych miast
 NUM_ANTS = 20           # Liczba mrówek
 MAX_ITERATIONS = 100    # Liczba iteracji
+STOP_ITERATIONS = 100   # Liczba iteracji bez zmian
 ALPHA = 1.0             # Waga śladu feromonu
 BETA = 5.0              # Waga heurystyki (odległość)
 EVAPORATION_RATE = 0.5  # Współczynnik parowania feromonu
@@ -20,7 +21,7 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--cities", help="Liczba miast", type=int, default=NUM_CITIES)
     parser.add_argument("-a", "--ants", help="Liczba mrówek", type=int, default=NUM_ANTS)
     parser.add_argument("-i", "--iterations", help="Liczba iteracji", type=int, default=MAX_ITERATIONS)
-    parser.add_argument("--stop", help="Liczba iteracji bez zmian", type=int, default=10)
+    parser.add_argument("--stop", help="Liczba iteracji bez zmian", type=int, default=S)
     parser.add_argument("--alpha", help="Waga śladu feromonu", type=float, default=ALPHA)
     parser.add_argument("--beta", help="Waga heurystyki (odległość)", type=float, default=BETA)
     parser.add_argument("--evaporation", help="Współczynnik parowania feromonu", type=float, default=EVAPORATION_RATE)
